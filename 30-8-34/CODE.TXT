@@ -1,0 +1,220 @@
+indows PowerShell
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Install the latest PowerShell for new features and improvements! https://aka.ms/PSWindows
+
+PS C:\Users\91811> mongosh
+Current Mongosh Log ID: 66d158bafa7d8450cb2710bb
+Connecting to:          mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.3.0
+Using MongoDB:          7.0.14
+Using Mongosh:          2.3.0
+
+For mongosh info see: https://www.mongodb.com/docs/mongodb-shell/
+
+------
+   The server generated these startup warnings when booting
+   2024-08-30T10:15:21.300+05:30: Access control is not enabled for the database. Read and write access to data and configuration is unrestricted
+------
+
+test> usde newdata
+Uncaught:
+SyntaxError: Missing semicolon. (1:4)
+
+> 1 | usde newdata
+    |     ^
+  2 |
+
+test> use newdata
+switched to db newdata
+newdata> db.student.find({marks:{gte:80})
+Uncaught:
+SyntaxError: Unexpected token, expected "," (1:31)
+
+> 1 | db.student.find({marks:{gte:80})
+    |                                ^
+  2 |
+
+newdata> db.student.find({marks:{$gte:80})
+Uncaught:
+SyntaxError: Unexpected token, expected "," (1:32)
+
+> 1 | db.student.find({marks:{$gte:80})
+    |                                 ^
+  2 |
+
+newdata> db.student.find({marks:"a"})
+
+newdata> db.student.find({grade:"a"})
+
+newdata> db.student.find({Grade:"a"})
+[
+  {
+    _id: ObjectId('66cebfb6fa78cd2f542710cc'),
+    name: 'Hindveer',
+    age: 22,
+    marks: 85,
+    Grade: 'a'
+  },
+  {
+    _id: ObjectId('66cebfb6fa78cd2f542710d0'),
+    name: 'spiddy',
+    age: 21,
+    marks: 88,
+    Grade: 'a'
+  }
+]
+newdata> db.student.find({Grade:"a"},age:{$gte:18})
+Uncaught:
+SyntaxError: Unexpected token, expected "," (1:31)
+
+> 1 | db.student.find({Grade:"a"},age:{$gte:18})
+    |                                ^
+  2 |
+
+newdata> db.student.find({{Grade:"a"},age:{$gte:18}})
+Uncaught:
+SyntaxError: Unexpected token (1:17)
+
+> 1 | db.student.find({{Grade:"a"},age:{$gte:18}})
+    |                  ^
+  2 |
+
+newdata> db.student.find({Grade:"a"},age:{$gte:18}})
+Uncaught:
+SyntaxError: Unexpected token, expected "," (1:31)
+
+> 1 | db.student.find({Grade:"a"},age:{$gte:18}})
+    |                                ^
+  2 |
+
+newdata> db.student.find({Grade:"a"},age:{$gte:18}})
+Uncaught:
+SyntaxError: Unexpected token, expected "," (1:31)
+
+> 1 | db.student.find({Grade:"a"},age:{$gte:18}})
+    |                                ^
+  2 |
+
+newdata>
+
+
+newdata>
+
+newdata>
+
+
+newdata>
+
+newdata> db.student.find({Grade:"a"},{age:{$gte:18}})
+MongoServerError[Location16020]: Expression $gte takes exactly 2 arguments. 1 were passed in.
+newdata> db.student.find({Grade:"a"},{age:{$gte:18}})
+MongoServerError[Location16020]: Expression $gte takes exactly 2 arguments. 1 were passed in.
+newdata> db.student.find({marks:{$gte:80} , age:{$gte:18}})
+[
+  {
+    _id: ObjectId('66cebfb6fa78cd2f542710cc'),
+    name: 'Hindveer',
+    age: 22,
+    marks: 85,
+    Grade: 'a'
+  },
+  {
+    _id: ObjectId('66cebfb6fa78cd2f542710cd'),
+    name: 'Harmeet',
+    age: 24,
+    marks: 92,
+    Grade: 'a+'
+  },
+  {
+    _id: ObjectId('66cebfb6fa78cd2f542710d0'),
+    name: 'spiddy',
+    age: 21,
+    marks: 88,
+    Grade: 'a'
+  }
+]
+newdata> db.student.find({{Grade:"a"},{age:{$gte:18}})
+Uncaught:
+SyntaxError: Unexpected token (1:17)
+
+> 1 | db.student.find({{Grade:"a"},{age:{$gte:18}})
+    |                  ^
+  2 |
+
+newdata> db.student.find({marks:{$gte:80} , age:{$gte:18}})
+[
+  {
+    _id: ObjectId('66cebfb6fa78cd2f542710cc'),
+    name: 'Hindveer',
+    age: 22,
+    marks: 85,
+    Grade: 'a'
+  },
+  {
+    _id: ObjectId('66cebfb6fa78cd2f542710cd'),
+    name: 'Harmeet',
+    age: 24,
+    marks: 92,
+    Grade: 'a+'
+  },
+  {
+    _id: ObjectId('66cebfb6fa78cd2f542710d0'),
+    name: 'spiddy',
+    age: 21,
+    marks: 88,
+    Grade: 'a'
+  }
+]
+newdata> db.student.find({$and:[{marks:{$gte:80} , age:{$gte:18}}]})
+[
+  {
+    _id: ObjectId('66cebfb6fa78cd2f542710cc'),
+    name: 'Hindveer',
+    age: 22,
+    marks: 85,
+    Grade: 'a'
+  },
+  {
+    _id: ObjectId('66cebfb6fa78cd2f542710cd'),
+    name: 'Harmeet',
+    age: 24,
+    marks: 92,
+    Grade: 'a+'
+  },
+  {
+    _id: ObjectId('66cebfb6fa78cd2f542710d0'),
+    name: 'spiddy',
+    age: 21,
+    marks: 88,
+    Grade: 'a'
+  }
+]
+newdata> db.student.find({$or:[{marks:{$gte:80} , age:{$gte:18}}]})
+[
+  {
+    _id: ObjectId('66cebfb6fa78cd2f542710cc'),
+    name: 'Hindveer',
+    age: 22,
+    marks: 85,
+    Grade: 'a'
+  },
+  {
+    _id: ObjectId('66cebfb6fa78cd2f542710cd'),
+    name: 'Harmeet',
+    age: 24,
+    marks: 92,
+    Grade: 'a+'
+  },
+  {
+    _id: ObjectId('66cebfb6fa78cd2f542710d0'),
+    name: 'spiddy',
+    age: 21,
+    marks: 88,
+    Grade: 'a'
+  }
+]
+newdata> db.student.find({$exists:[{marks:{$gte:80} , age:{$gte:18}}]})
+MongoServerError[BadValue]: unknown top level operator: $exists. If you have a field name that starts with a '$' symbol, consider using $getField or $setField.
+newdata> db.student.find({$exists:{marks}})
+ReferenceError: marks is not defined
+newdata>
